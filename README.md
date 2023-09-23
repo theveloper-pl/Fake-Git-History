@@ -9,6 +9,9 @@ Create multiple commits between two dates
 If you choose to create a single commit, you will be prompted to enter the date in the format YYYY/MM/DD. The script will then create a random number of commits on that day, each with a random commit message.
 
 If you choose to create multiple commits, you will be prompted to enter the start and stop dates in the format YYYY/MM/DD. The script will then create a random number of commits (between 45 and 113) on each day between the start and stop dates, with random commit messages.
+
+If using range commits please keep in mind that pushing range greater than 10/15 might results in no effect on GitHub.
+
 ## You should adjust these variables 
 ```
         self.min_commits = 45
