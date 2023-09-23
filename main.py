@@ -10,7 +10,7 @@ class FakeGit():
         self.min_commits = 45
         self.max_commits = 113
         self.repo = None
-        self.remote_url = "https://github.com/theveloper-pl/Fake-Git-History.git"
+        self.remote_url = "https://github.com/theveloper-pl/FakeGit2.git"
         self.repo_name = self.remote_url.split("/")[-1].split(".")[0]
         print("[Info]: Starting")
 

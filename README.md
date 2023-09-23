@@ -17,7 +17,13 @@ If you choose to create multiple commits, you will be prompted to enter the star
 ```
 ## How to use
 ``````
-python fake_git.py
+git clone https://github.com/theveloper-pl/Fake-Git-History.git
+cd Fake-Git-History/
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+Change variables in source code
+python main.py
 
 1.Create single commit
 2.Range of commits
