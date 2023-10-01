@@ -1,10 +1,12 @@
-import git
-import os
 import datetime as mydate
-import uuid
+import os
 import random
+import uuid
 
-class FakeGit():
+import git
+
+
+class FakeGit:
     def __init__(self):
         self.project_dir = os.path.realpath(os.path.dirname(__file__))
         self.min_commits = 45
@@ -19,24 +21,23 @@ class FakeGit():
             print("[Info]: Loading git repository")
             self.repo = git.Repo(os.path.join(self.project_dir, self.repo_name))
             print("[Info]: Repo loaded")
-        except git.exc.NoSuchPathError :
+        except git.exc.NoSuchPathError:
             print("[Error]: Repo not found. Creating new one from remote-url")
             os.mkdir(os.path.join(self.project_dir, self.repo_name))
             self.repo = git.Repo.clone_from(self.remote_url, os.path.join(self.project_dir, self.repo_name))
 
-    def execute_comit(self, year:int, month:int, day:int):
+    def execute_commit(self, year: int, month: int, day: int):
         action_date = str(mydate.date(year, month, day).strftime('%Y-%m-%d %H:%M:%S'))
         os.environ["GIT_AUTHOR_DATE"] = action_date
         os.environ["GIT_COMMITTER_DATE"] = action_date
         self.repo.index.commit(message=f"{(uuid.uuid4())}")
 
-
-    def single_commit(self, year:int, month:int, day:int):
+    def single_commit(self, year: int, month: int, day: int):
         current_date = mydate.date(year, month, day)
         commits_amount = random.randint(self.min_commits, self.max_commits)
         print(f"Currently commiting {current_date} with {commits_amount} commits")
         for x in range(commits_amount):
-            self.execute_comit(current_date.year, current_date.month, current_date.day)
+            self.execute_commit(current_date.year, current_date.month, current_date.day)
 
     def many_commits(self, start_date, stop_date, mix=False):
         while True:
@@ -47,7 +48,7 @@ class FakeGit():
             else:
                 start_date = start_date + mydate.timedelta(days=1)
 
-            if start_date>=stop_date:
+            if start_date >= stop_date:
                 break
 
     def git_push(self):
@@ -58,7 +59,6 @@ class FakeGit():
             print(f'Error occured while pushing the code !:\n{e}')
         else:
             print("Changes have been pushed !")
-
 
 
 if __name__ == "__main__":
@@ -78,7 +78,3 @@ if __name__ == "__main__":
 
         FakeGit.many_commits(start_date, stop_date)
         FakeGit.git_push()
-
-
-
-
