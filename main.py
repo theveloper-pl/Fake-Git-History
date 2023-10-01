@@ -12,7 +12,7 @@ class FakeGit:
         self.min_commits = 45
         self.max_commits = 113
         self.repo = None
-        self.remote_url = "https://github.com/theveloper-pl/FakeGit2.git"
+        self.remote_url = "https://github.com/theveloper-pl/Fake-Git-History.git"
         self.repo_name = self.remote_url.split("/")[-1].split(".")[0]
         print("[Info]: Starting")
 
@@ -39,16 +39,15 @@ class FakeGit:
         for x in range(commits_amount):
             self.execute_commit(current_date.year, current_date.month, current_date.day)
 
-    def many_commits(self, start_date, stop_date, mix=False):
+    def many_commits(self, commit_start_date, commit_stop_date, mix=False):
         while True:
-            self.single_commit(start_date.year, start_date.month, start_date.day)
+            self.single_commit(commit_start_date.year, commit_start_date.month, commit_start_date.day)
             random_days = random.randint(3, 9)
             if mix:
-                start_date = start_date + mydate.timedelta(days=random_days)
+                commit_start_date = commit_start_date + mydate.timedelta(days=random_days)
             else:
-                start_date = start_date + mydate.timedelta(days=1)
-
-            if start_date >= stop_date:
+                commit_start_date = commit_start_date + mydate.timedelta(days=1)
+            if commit_start_date >= commit_stop_date:
                 break
 
     def git_push(self):
@@ -56,7 +55,7 @@ class FakeGit:
             origin = self.repo.remote(name='origin')
             origin.push()
         except Exception as e:
-            print(f'Error occured while pushing the code !:\n{e}')
+            print(f'Error occurred while pushing the code !:\n{e}')
         else:
             print("Changes have been pushed !")
 
